@@ -102,7 +102,8 @@ func (rd *Record) recommend(user string, K int) string {
 				recommendItems[item] = (float64(wut) / math.Log(float64(1+len(rd.tagsUser[tag])))) *
 					(float64(wti) / math.Log(float64(1+len(rd.itemUser[item]))))
 			} else {
-				recommendItems[item] += float64(wti) / math.Log(float64(1+len(rd.tagsUser[tag])))
+				recommendItems[item] += (float64(wut) / math.Log(float64(1+len(rd.tagsUser[tag])))) *
+					(float64(wti) / math.Log(float64(1+len(rd.tagsUser[tag]))))
 			}
 		}
 	}
@@ -209,7 +210,7 @@ func main() {
 	fmt.Println("====================")
 	fmt.Println("音乐被用户标记次数: ", rd.itemUser)
 	fmt.Println("====================")
-	rec := rd.recommend("南泽华", 2)
+	rec := rd.recommend("huahua", 2)
 	fmt.Println("====================")
 	fmt.Println("推荐歌曲: ", rec)
 }
